@@ -38,4 +38,20 @@ def brainly(querydata):
 		'query': formatGraphQl
 	}
 	r = requests.post('https://brainly.co.id/graphql/id', headers = headers, json = query)
-	return r.text
+	return r.json()
+while True:
+	print('nanya apa bos ?')
+	z = input()
+	a = brainly(z)
+
+	b = a["data"]["questionSearch"]["edges"]
+	i = 0
+	if len(b) > 0:
+		for item in b:
+			i += 1
+			print(item["node"]["content"])
+			for item2 in item["node"]["answers"]["nodes"]:
+				print(item2["content"])
+			if i == 3:
+				break
+			# print('\n\n')
